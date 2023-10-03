@@ -1,0 +1,53 @@
+from scapy.all import rdpcap
+
+ 
+
+def classify_packets(pcap_file):
+
+    try:
+
+        packets = rdpcap(pcap_file)
+
+ 
+
+        for i, packet in enumerate(packets):
+
+            # Replace this condition with your own criteria for classifying packets
+
+            # Here, we are using packet size as an example
+
+            packet_size = len(packet)
+
+            if packet_size < 100:  # Adjust this threshold based on your requirements
+
+                print(f"Packet {i + 1}: Benign (Size: {packet_size} bytes)")
+
+            else:
+
+                print(f"Packet {i + 1}: Potentially Malware (Size: {packet_size} bytes)")
+
+ 
+
+    except FileNotFoundError:
+
+        print(f"File not found: {pcap_file}")
+
+    except Exception as e:
+
+        print(f"An error occurred: {str(e)}")
+
+ 
+
+def main():
+
+    pcap_file = "Packetsniffing.pcapng"  # Replace with the actual file path
+
+ 
+
+    classify_packets(pcap_file)
+
+ 
+
+if __name__ == "__main__":
+
+    main()
